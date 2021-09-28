@@ -8,10 +8,10 @@ import AppList from "./components/app-list";
 const TodoList = () => {
 
     const todoData = [
-        {label: 'Drink a tea', important: false},
-        {label: 'Install template for WordPress', important: true},
-        {label: 'Change blocks in template', important: false},
-        {label: 'Change style in template', important: false},
+        {label: 'Drink a tea', important: false, id: 1},
+        {label: 'Install template for WordPress', important: true, id: 2},
+        {label: 'Change blocks in template', important: false, id: 3},
+        {label: 'Change style in template', important: false, id: 4},
     ];
 
     return (
