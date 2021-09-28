@@ -2,11 +2,19 @@ import React from 'react';
 
 import TodoListItem from "./todo-list-item";
 
-const AppList = () => {
+const AppList = ({todoData}) => {
+
+    const listItem = todoData.map(item => {
+        return (
+            <li>
+                <TodoListItem {...item}/>
+            </li>
+        );
+    });
+
     return (
         <ul>
-            <li><TodoListItem label={'Install template for WordPress'} important /></li>
-            <li><TodoListItem label={'Change blocks'}/></li>
+            { listItem }
         </ul>
     );
 };

@@ -6,11 +6,19 @@ import AppSearch from './components/app-search';
 import AppList from "./components/app-list";
 
 const TodoList = () => {
+
+    const todoData = [
+        {label: 'Drink a tea', important: false},
+        {label: 'Install template for WordPress', important: true},
+        {label: 'Change blocks in template', important: false},
+        {label: 'Change style in template', important: false},
+    ];
+
     return (
         <div>
             <AppHeader />
             <AppSearch />
-            <AppList />
+            <AppList todoData={todoData}/>
         </div>
     );
 };
