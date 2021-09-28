@@ -5,8 +5,8 @@ import TodoListItem from "./todo-list-item";
 const AppList = () => {
     return (
         <ul>
-            <li><TodoListItem /></li>
-            <li><TodoListItem /></li>
+            <li><TodoListItem label={'Install template for WordPress'} important /></li>
+            <li><TodoListItem label={'Change blocks'}/></li>
         </ul>
     );
 };
