@@ -1,0 +1,14 @@
+.app-search {
+    border: 1px solid #6c757d;
+    border-radius: .25rem;
+    padding: 5px 10px;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+@media (min-width: 510px) {
+    .app-search {
+        width: auto;
+        margin-bottom: 0;
+    }
+}

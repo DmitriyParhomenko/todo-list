@@ -1,8 +1,10 @@
 import React from 'react';
 
-const TodoListItem = ({label, important}) => {
+import './todo-list-item.scss';
+
+const TodoListItem = ({important, label}) => {
     const style = {
-        color: important ? 'tomato' : 'black'
+        color: important ? 'white' : 'black'
     };
 
     return <span style={style} >{label}</span>
