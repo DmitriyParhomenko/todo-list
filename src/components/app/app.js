@@ -58,6 +58,14 @@ export default class App extends Component {
         })
     }
 
+    doneItem = (id) => {
+        console.log('Done ', id);
+    }
+
+    importantItem = (id) => {
+        console.log('Important ', id);
+    }
+
     render() {
         return (
             <div>
@@ -67,6 +75,8 @@ export default class App extends Component {
                     <AppList
                         todoData={this.state.todoData}
                         onRemoveItem={this.removeItem}
+                        onDoneItem={this.doneItem}
+                        onImportantItem={this.importantItem}
                     />
                     <AppAddForm btnName={'Add To Do'} onAddItem={this.addItem}/>
                 </div>

@@ -6,7 +6,7 @@ import AppImportantItem from '../app-important-item/app-important-item';
 
 import './app-list.scss';
 
-const AppList = ({todoData, onRemoveItem}) => {
+const AppList = ({ todoData, onRemoveItem, onDoneItem, onImportantItem }) => {
 
     const listItem = todoData.map(item => {
 
@@ -14,10 +14,12 @@ const AppList = ({todoData, onRemoveItem}) => {
 
         return (
             <li key={id} className={`list-group-item ${important  ? 'active' : ''}`}>
-                <TodoListItem important={important} {...itemProps} />
+                <TodoListItem important={important}
+                              onDoneItem={() => onDoneItem(id)}
+                              {...itemProps} />
                 <div className="list-group-item-actions">
                     <AppRemoveItem onRemoveItem={() => onRemoveItem(id)} />
-                    <AppImportantItem />
+                    <AppImportantItem onImportantItem={() => onImportantItem(id)} />
                 </div>
             </li>
         );
