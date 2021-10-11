@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import AppHeader from '../app-header/app-header';
 import AppMainSearch from '../app-main-search/app-main-search';
 import AppList from '../app-list/app-list';
+import AppAddForm from '../app-add-form/app-add-form';
 
 import './app.scss';
 
@@ -32,6 +33,31 @@ export default class App extends Component {
         })
     }
 
+    addItem = (text) => {
+        let maxId = 0;
+
+        this.state.todoData.map((obj) => {
+            if(obj.id > maxId) maxId = obj.id;
+        })
+
+        const newItem = {
+            label: text,
+            important: false,
+            id: ++maxId
+        }
+
+        this.setState(({ todoData }) => {
+            const newArr = [
+                ...todoData,
+                newItem
+            ];
+
+            return {
+                todoData: newArr
+            }
+        })
+    }
+
     render() {
         return (
             <div>
@@ -40,7 +66,9 @@ export default class App extends Component {
                     <AppMainSearch />
                     <AppList
                         todoData={this.state.todoData}
-                        onRemoveItem={this.removeItem} />
+                        onRemoveItem={this.removeItem}
+                    />
+                    <AppAddForm btnName={'Add To Do'} onAddItem={this.addItem}/>
                 </div>
             </div>
         );
