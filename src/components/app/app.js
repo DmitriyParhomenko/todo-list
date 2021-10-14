@@ -28,6 +28,31 @@ export default class App extends Component {
         }
     }
 
+    changeStateToDoData(id, event) {
+        this.setState(( { todoData } ) => {
+            // Update odject
+            const idx = todoData.findIndex((elem) => elem.id === id);
+            const oldItem = todoData[idx];
+
+            const newItem = {
+                ...oldItem,
+                done: event === 'done' ? !oldItem.done : oldItem.done,
+                important: event === 'important' ? !oldItem.important : oldItem.important
+            };
+
+            // Construct new array
+            const newArray = [
+                ...todoData.slice(0, idx),
+                newItem,
+                ...todoData.slice(idx + 1)
+            ];
+
+            return {
+                todoData: newArray
+            };
+        })
+    }
+
     removeItem = (id) => {
         this.setState(({ todoData }) => {
             const idx = todoData.findIndex((elem) => elem.id === id);
@@ -63,31 +88,11 @@ export default class App extends Component {
     }
 
     doneItem = (id) => {
-        this.setState(( { todoData } ) => {
-
-            // Update odject
-            const idx = todoData.findIndex((elem) => elem.id === id);
-            const oldItem = todoData[idx];
-            const newItem = {
-                ...oldItem,
-                done: !oldItem.done
-            };
-
-            // Construct new array
-            const newArray = [
-                ...todoData.slice(0, idx),
-                newItem,
-                ...todoData.slice(idx + 1)
-            ];
-
-            return {
-                todoData: newArray
-            };
-        })
+        this.changeStateToDoData(id, 'done');
     }
 
     importantItem = (id) => {
-        console.log('Important ', id);
+        this.changeStateToDoData(id, 'important');
     }
 
     render() {
