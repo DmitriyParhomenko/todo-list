@@ -9,13 +9,23 @@ import './app.scss';
 
 export default class App extends Component {
 
+    maxId = 0;
+
     state = {
         todoData: [
-            {label: 'Drink a tea', important: false, id: 1},
-            {label: 'Install template for WordPress', important: false, id: 2},
-            {label: 'Change blocks in template', important: true, id: 3},
-            {label: 'Change style in template', important: false, id: 4},
+            this.createTodoItem('Drink a tea'),
+            this.createTodoItem('Install template for WordPress'),
+            this.createTodoItem('Change blocks in template')
         ]
+    }
+
+    createTodoItem(label) {
+        return {
+            label,
+            important: false,
+            done: false,
+            id: ++this.maxId
+        }
     }
 
     removeItem = (id) => {
@@ -34,17 +44,11 @@ export default class App extends Component {
     }
 
     addItem = (text) => {
-        let maxId = 0;
-
         this.state.todoData.map((obj) => {
-            if(obj.id > maxId) maxId = obj.id;
+            if(obj.id > this.maxId) this.maxId = obj.id;
         })
 
-        const newItem = {
-            label: text,
-            important: false,
-            id: ++maxId
-        }
+        const newItem = this.createTodoItem(text)
 
         this.setState(({ todoData }) => {
             const newArr = [
@@ -59,7 +63,27 @@ export default class App extends Component {
     }
 
     doneItem = (id) => {
-        console.log('Done ', id);
+        this.setState(( { todoData } ) => {
+
+            // Update odject
+            const idx = todoData.findIndex((elem) => elem.id === id);
+            const oldItem = todoData[idx];
+            const newItem = {
+                ...oldItem,
+                done: !oldItem.done
+            };
+
+            // Construct new array
+            const newArray = [
+                ...todoData.slice(0, idx),
+                newItem,
+                ...todoData.slice(idx + 1)
+            ];
+
+            return {
+                todoData: newArray
+            };
+        })
     }
 
     importantItem = (id) => {
