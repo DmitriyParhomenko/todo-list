@@ -28,7 +28,7 @@ export default class App extends Component {
         }
     }
 
-    changeStateToDoData(id, event) {
+    changeStateToDoData(id, propName) {
         this.setState(( { todoData } ) => {
             // Update odject
             const idx = todoData.findIndex((elem) => elem.id === id);
@@ -36,8 +36,7 @@ export default class App extends Component {
 
             const newItem = {
                 ...oldItem,
-                done: event === 'done' ? !oldItem.done : oldItem.done,
-                important: event === 'important' ? !oldItem.important : oldItem.important
+                [propName]: !oldItem[propName]
             };
 
             // Construct new array
