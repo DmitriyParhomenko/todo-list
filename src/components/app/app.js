@@ -99,7 +99,7 @@ export default class App extends Component {
         return (
             <div>
                 <div className="main-wrapper">
-                    <AppHeader />
+                    <AppHeader todoData={this.state.todoData} />
                     <AppMainSearch />
                     <AppList
                         todoData={this.state.todoData}
