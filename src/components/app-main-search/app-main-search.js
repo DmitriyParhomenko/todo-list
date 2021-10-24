@@ -5,11 +5,11 @@ import AppFilter from '../app-filter/app-filter';
 
 import './app-main-search.scss';
 
-const AppMainSearch = () => {
+const AppMainSearch = ({todoData, onSearchChange}) => {
     return (
         <div className="app-main-search">
-            <AppSearch />
-            <AppFilter />
+            <AppSearch onSearchChange={onSearchChange}/>
+            <AppFilter todoData={todoData} />
         </div>
     );
 };

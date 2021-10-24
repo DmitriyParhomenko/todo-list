@@ -16,7 +16,8 @@ export default class App extends Component {
             this.createTodoItem('Drink a tea'),
             this.createTodoItem('Install template for WordPress'),
             this.createTodoItem('Change blocks in template')
-        ]
+        ],
+        term: ''
     }
 
     createTodoItem(label) {
@@ -94,14 +95,34 @@ export default class App extends Component {
         this.changeStateToDoData(id, 'important');
     }
 
+    onSearchChange = (term) => {
+        this.setState({ term });
+    }
+
+    search(items, term) {
+        if(term.length === 0) return items;
+
+        return items.filter((item) => {
+            return item.label
+                .toLowerCase()
+                .indexOf(term.toLowerCase()) > -1;
+        });
+    }
+
     render() {
+        const { todoData, term } = this.state;
+
+        const visibleItem = this.search(todoData, term);
+
         return (
             <div>
                 <div className="main-wrapper">
-                    <AppHeader todoData={this.state.todoData} />
-                    <AppMainSearch />
+                    <AppHeader todoData={todoData} />
+                    <AppMainSearch todoData={todoData}
+                                   onSearchChange={this.onSearchChange}
+                    />
                     <AppList
-                        todoData={this.state.todoData}
+                        todoData={visibleItem}
                         onRemoveItem={this.removeItem}
                         onDoneItem={this.doneItem}
                         onImportantItem={this.importantItem}
