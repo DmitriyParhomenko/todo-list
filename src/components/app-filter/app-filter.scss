@@ -2,6 +2,13 @@
     border: 1px solid #6c757d;
     border-radius: .25rem;
 
+    .app-filter-btn {
+        border-left: none;
+        border-bottom: none;
+        border-top: none;
+        border-radius: 0;
+    }
+
     .btn:last-child {
         border-right: 0;
     }

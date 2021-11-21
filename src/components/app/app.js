@@ -17,7 +17,8 @@ export default class App extends Component {
             this.createTodoItem('Install template for WordPress'),
             this.createTodoItem('Change blocks in template')
         ],
-        term: ''
+        term: '',
+        filter: 'all'
     }
 
     createTodoItem(label) {
@@ -99,6 +100,10 @@ export default class App extends Component {
         this.setState({ term });
     }
 
+    onFilterChange = (filter) => {
+        this.setState({ filter });
+    }
+
     search(items, term) {
         if(term.length === 0) return items;
 
@@ -109,17 +114,34 @@ export default class App extends Component {
         });
     }
 
-    render() {
-        const { todoData, term } = this.state;
+    filter(items, filter) {
+        switch (filter) {
+            case 'all':
+                return items;
+            case 'active':
+                return items.filter((item) => !item.done);
+            case 'done':
+                return items.filter((item) => item.done);
+            default:
+                return items;
+        }
+    }
 
-        const visibleItem = this.search(todoData, term);
+    render() {
+        const { todoData, term, filter } = this.state;
+
+        const visibleItem = this.filter(
+            this.search(todoData, term),
+            filter
+        );
 
         return (
             <div>
                 <div className="main-wrapper">
                     <AppHeader todoData={todoData} />
-                    <AppMainSearch todoData={todoData}
-                                   onSearchChange={this.onSearchChange}
+                    <AppMainSearch onSearchChange={this.onSearchChange}
+                                   onFilterChange={this.onFilterChange}
+                                   filter={filter}
                     />
                     <AppList
                         todoData={visibleItem}

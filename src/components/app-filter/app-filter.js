@@ -1,27 +1,34 @@
 import React, { Component } from 'react';
 
-import AppFilterBtn from '../app-filter-btn/app-filter-btn';
-
 import './app-filter.scss';
 
 export default class AppFilter extends Component {
-    onFilterBtn = (name) => {
-        console.log(name)
-    };
+    buttons = [
+        {name: 'all', label: 'All'},
+        {name: 'active', label: 'Active'},
+        {name: 'done', label: 'Done'}
+    ];
 
     render() {
+        const {filter, onFilterChange} = this.props;
+
+        const buttons = this.buttons.map(({name, label}) => {
+            const isActive = filter === name;
+            const clazz = isActive ? 'btn-primary' : 'btn-outline-secondary';
+
+            return (
+                <button type="button"
+                        className={`btn app-filter-btn ${clazz}`}
+                        key={name}
+                        onClick={() => onFilterChange(name)}>
+                    {label}
+                </button>
+            )
+        });
+
         return (
             <div className="app-filter">
-                <AppFilterBtn label='All'
-                              name='all'
-                              onFilterBtn={this.onFilterBtn}
-                              active />
-                <AppFilterBtn label='Active'
-                              name='active'
-                              onFilterBtn={this.onFilterBtn} />
-                <AppFilterBtn label='Done'
-                              name='done'
-                              onFilterBtn={this.onFilterBtn} />
+                {buttons}
             </div>
         );
     }
