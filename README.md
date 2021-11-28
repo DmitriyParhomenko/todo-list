@@ -1,6 +1,6 @@
 # Todo List
 
-### [View Todo List](https://dmitriyparhomenko.github.io/todo-list/)
+### [View Todo List](https://raiks-reminder.herokuapp.com/)
 
 # Getting Started with Create React App
 
