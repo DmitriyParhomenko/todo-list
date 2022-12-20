@@ -1,6 +1,6 @@
 # Todo List
 
-### [View Todo List](https://raiks-reminder.herokuapp.com/)
+### [View Todo List](https://raiks-todo-list.onrender.com)
 
 # Getting Started with Create React App
 
